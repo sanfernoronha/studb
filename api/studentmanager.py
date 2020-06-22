@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_utils import PhoneNumber
 import json
 from flask_marshmallow import Marshmallow
-from flask_migrate import Migrate
+# from flask_migrate import Migrate
 
 
 project_dir = os.path.dirname(os.path.abspath(__file__))
@@ -16,7 +16,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = database_file
 
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
-migrate = Migrate(app, db)
+# migrate = Migrate(app, db)
 
 
 class Student(db.Model):
@@ -44,7 +44,12 @@ class StudentSchema(ma.Schema):
 student_schema = StudentSchema(many=True)
 
 
-@app.route('/', methods=["GET", "POST"])
+@app.route('/')
+def start():
+    return jsonify('Pong!')
+
+
+@app.route('/getstudents', methods=["GET", "POST"])
 def home():
     students = Student.query.all()
     result = student_schema.dump(students)

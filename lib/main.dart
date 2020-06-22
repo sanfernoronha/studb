@@ -20,7 +20,8 @@ class _MyAppState extends State<MyApp> {
   List data = [];
 
   Future<String> getData() async {
-    var response = await http.get(Uri.encodeFull("http://10.0.2.2:5000/"),
+    var response = await http.get(
+        Uri.encodeFull("http://10.0.2.2:5000/getstudents"),
         headers: {"Accept": "application/json"});
 
     this.setState(() {
